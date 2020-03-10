@@ -13,11 +13,13 @@ const fs = require('fs');
     const makersAnchors = await makersUl.$$('li a');
 
     let res = []
-    for (let i = 0; i < makersAnchors.length; i++) {
+    for (let i = 0; i < 1; i++) {
       await page.goto(targetUrl);
       await page.waitForSelector('.makers');
       const makersUl = await page.$('.makers ul');
+      const lis = await makersUl.$$('li');
       const makersAnchors = await makersUl.$$('li a');
+      let phoneImg = await lis[i].$eval('img', img => img.src)
 
       const anchor = makersAnchors[i];
       await anchor.click();
@@ -49,6 +51,7 @@ const fs = require('fs');
       res.push({
         phone_id: i,
         phone_name: phoneName,
+        phone_image: phoneImg,
         data: data
       })
       console.log(phoneName, 'successfull fetched!')
