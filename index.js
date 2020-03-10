@@ -13,7 +13,7 @@ const fs = require('fs');
     const makersAnchors = await makersUl.$$('li a');
 
     let res = []
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < makersAnchors.length; i++) {
       await page.goto(targetUrl);
       await page.waitForSelector('.makers');
       const makersUl = await page.$('.makers ul');
